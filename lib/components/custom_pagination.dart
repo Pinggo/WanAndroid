@@ -7,29 +7,31 @@ class CustomPagination extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      color: Colors.black12,
-      height: 36,
-      padding: EdgeInsets.only(top: 4,bottom: 4,left: 8,right: 8),
-      child: Row(
-        children: <Widget>[
-          Text(title,
-            style: TextStyle(color: Colors.white,),
-          ),
-        Expanded(
-           flex: 1,
-           child: Align(
-             alignment: Alignment.centerRight,
-             child: DotSwiperPaginationBuilder(
-               size: 6,
-               activeSize: 6,
-               space: 2
-             ).build(context, config),
+   return Align(
+     alignment: Alignment.bottomCenter,
+     child: Container(
+       color: Colors.black12,
+       height: 36,
+       padding: EdgeInsets.only(top: 4,bottom: 4,left: 8,right: 8),
+       child: Row(
+         children: <Widget>[
+           Text(title,
+             style: TextStyle(color: Colors.white,),
            ),
-        ),
-        ],
-      ),
-    );
+           Expanded(
+             flex: 1,
+             child: Align(
+               alignment: Alignment.centerRight,
+               child: DotSwiperPaginationBuilder(
+                   size: 6,
+                   activeSize: 6,
+                   space: 2
+               ).build(context, config),
+             ),
+           ),
+         ],
+       ),
+     ),
+   );
   }
 }
