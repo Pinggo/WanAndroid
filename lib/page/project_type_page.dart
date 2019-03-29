@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/home_article_item.dart';
-import 'package:flutter_app/components/home_banner.dart';
 import 'package:flutter_app/http/api.dart';
 import 'package:flutter_app/http/http_util.dart';
 import 'package:flutter_app/model/article_bean.dart';
+class ProjectTypePage extends StatefulWidget{
+  final int id;
 
-class HomePage extends StatefulWidget {
+  ProjectTypePage(this.id,{Key key}):super(key:key);
   @override
   State<StatefulWidget> createState() {
-    return _HomePageState();
+    return _ProjectTypePageState();
   }
 }
-
-class _HomePageState extends State<HomePage> {
+class _ProjectTypePageState extends State<ProjectTypePage>{
   ScrollController _scrollController = new ScrollController();
   List<ArticleBean> articles = [];
   bool isOver = false;
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   void loadArticles(bool isLoadMore) async {
     var response = await HttpUtil.get(
-        Api.URL + Api.ARTICLE_LIST + _pageIndex.toString() + '/json');
+        Api.URL + Api.PROJECT_LIST + _pageIndex.toString() + '/json?cid='+widget.id.toString());
     BaseArticleBean baseArticleBean = BaseArticleBean.fromJson(response);
     if (baseArticleBean.errorCode == 0) {
       ArticleListBean listBean = baseArticleBean.data;
@@ -73,19 +73,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('首页'),
-      ),
       body: RefreshIndicator(
         child: ListView.builder(
           itemCount: articles.length + 1,
           itemBuilder: (context, index) {
-            if (index == 0) {
-              return HomeBanner();
-            } else if (index == articles.length) {
+            if (index == articles.length) {
               return _getMoreWidget();
             } else {
-              return HomeArticleItem(articles[index - 1]);
+              return HomeArticleItem(articles[index]);
             }
           },
           controller: _scrollController,

@@ -42,9 +42,6 @@ class _MainPageState extends State<MainPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(tabItems[_tabIndex].title),
-      ),
       body: _pageList[_tabIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: tabItems.map(
