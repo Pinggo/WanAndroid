@@ -27,6 +27,10 @@ class _WxTypePageState extends State<WxTypePage> with AutomaticKeepAliveClientMi
     if (baseArticleBean.errorCode == 0) {
       ArticleListBean listBean = baseArticleBean.data;
       isOver = listBean.over;
+      if(isOver){
+        setState(() {
+        });
+      }
       if (this.mounted) {
         setState(() {
           if (isLoadMore) {

@@ -26,6 +26,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
     if (baseArticleBean.errorCode == 0) {
       ArticleListBean listBean = baseArticleBean.data;
       isOver = listBean.over;
+      if(isOver){
+        setState(() {
+        });
+      }
       if (this.mounted) {
         setState(() {
           if (isLoadMore) {

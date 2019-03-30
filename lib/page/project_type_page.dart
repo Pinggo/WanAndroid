@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/home_article_item.dart';
+import 'package:flutter_app/components/project_article_item.dart';
 import 'package:flutter_app/http/api.dart';
 import 'package:flutter_app/http/http_util.dart';
 import 'package:flutter_app/model/article_bean.dart';
@@ -16,7 +16,7 @@ class _ProjectTypePageState extends State<ProjectTypePage> with AutomaticKeepAli
   ScrollController _scrollController = new ScrollController();
   List<ArticleBean> articles = [];
   bool isOver = false;
-  int _pageIndex = 0;
+  int _pageIndex = 1;
   bool isLoading = false;
 
   void loadArticles(bool isLoadMore) async {
@@ -36,6 +36,10 @@ class _ProjectTypePageState extends State<ProjectTypePage> with AutomaticKeepAli
             articles.addAll(listBean.datas);
           }
         });
+        if(isOver){
+          setState(() {
+          });
+        }
       }
     }
   }
@@ -81,7 +85,7 @@ class _ProjectTypePageState extends State<ProjectTypePage> with AutomaticKeepAli
             if (index == articles.length) {
               return _getMoreWidget();
             } else {
-              return HomeArticleItem(articles[index]);
+              return ProjectArticleItem(articles[index]);
             }
           },
           controller: _scrollController,
