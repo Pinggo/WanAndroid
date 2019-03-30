@@ -11,7 +11,7 @@ class ProjectPage extends StatefulWidget {
   }
 }
 
-class _ProjectPageState extends State<ProjectPage> {
+class _ProjectPageState extends State<ProjectPage> with AutomaticKeepAliveClientMixin{
   List<ProjectTypeBean> projectTypes = [];
 
   @override
@@ -48,6 +48,7 @@ class _ProjectPageState extends State<ProjectPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (projectTypes.length == 0) {
       return _getLoadingWidget();
     }
@@ -73,4 +74,7 @@ class _ProjectPageState extends State<ProjectPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -13,7 +13,7 @@ class HomeBanner extends StatefulWidget {
   }
 }
 
-class HomeBannerState extends State<HomeBanner> {
+class HomeBannerState extends State<HomeBanner> with AutomaticKeepAliveClientMixin{
   List<BannerBean> banners = [];
 
   void loadBanners() async {
@@ -40,6 +40,7 @@ class HomeBannerState extends State<HomeBanner> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       height: 200,
       child: banners.length != 0
@@ -75,4 +76,7 @@ class HomeBannerState extends State<HomeBanner> {
             ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

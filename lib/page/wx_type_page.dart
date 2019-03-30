@@ -3,6 +3,7 @@ import 'package:flutter_app/components/home_article_item.dart';
 import 'package:flutter_app/http/api.dart';
 import 'package:flutter_app/http/http_util.dart';
 import 'package:flutter_app/model/article_bean.dart';
+
 class WxTypePage extends StatefulWidget{
   final int id;
 
@@ -12,7 +13,7 @@ class WxTypePage extends StatefulWidget{
     return _WxTypePageState();
   }
 }
-class _WxTypePageState extends State<WxTypePage>{
+class _WxTypePageState extends State<WxTypePage> with AutomaticKeepAliveClientMixin{
   ScrollController _scrollController = new ScrollController();
   List<ArticleBean> articles = [];
   bool isOver = false;
@@ -72,6 +73,7 @@ class _WxTypePageState extends State<WxTypePage>{
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: RefreshIndicator(
         child: ListView.builder(
@@ -131,4 +133,7 @@ class _WxTypePageState extends State<WxTypePage>{
     super.dispose();
     _scrollController.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

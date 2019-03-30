@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/http/http_util.dart';
 import 'package:flutter_app/http/api.dart';
 import 'package:flutter_app/model/project_type_bean.dart';
-import 'package:flutter_app/page/project_type_page.dart';
 import 'package:flutter_app/page/wx_type_page.dart';
 
 class WxPage extends StatefulWidget {
@@ -12,7 +11,7 @@ class WxPage extends StatefulWidget {
   }
 }
 
-class _WxPageState extends State<WxPage> {
+class _WxPageState extends State<WxPage> with AutomaticKeepAliveClientMixin{
   List<ProjectTypeBean> projectTypes = [];
 
   @override
@@ -49,6 +48,7 @@ class _WxPageState extends State<WxPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (projectTypes.length == 0) {
       return _getLoadingWidget();
     }
@@ -74,4 +74,7 @@ class _WxPageState extends State<WxPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

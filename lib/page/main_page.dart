@@ -32,17 +32,43 @@ class TabItem {
 }
 
 class _MainPageState extends State<MainPageWidget> {
-  int _tabIndex = 0;
+  PageController _controller;
+  int _tabIndex;
   List<Widget> _pageList = <Widget>[
     HomePage(),
     ProjectPage(),
     WxPage(),
   ];
-
+  @override
+  void initState() {
+    super.initState();
+    _tabIndex = 0;
+    _controller = PageController();
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+  void _pageChange(int index){
+    if(index!=_tabIndex){
+      setState(() {
+        _tabIndex = index;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageList[_tabIndex],
+      body: PageView.builder(
+         physics: NeverScrollableScrollPhysics(),
+          onPageChanged: _pageChange,
+          controller: _controller,
+          itemCount: _pageList.length,
+          itemBuilder: (context,index){
+           return _pageList[index];
+          }
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: tabItems.map(
           (TabItem tabItem) {
@@ -56,9 +82,7 @@ class _MainPageState extends State<MainPageWidget> {
         currentIndex: _tabIndex,
         iconSize: 24,
         onTap: (index){
-          setState(() {
-            _tabIndex = index;
-          });
+          _controller.jumpToPage(index);
         },
       ),
     );

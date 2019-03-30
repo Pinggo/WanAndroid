@@ -12,7 +12,7 @@ class ProjectTypePage extends StatefulWidget{
     return _ProjectTypePageState();
   }
 }
-class _ProjectTypePageState extends State<ProjectTypePage>{
+class _ProjectTypePageState extends State<ProjectTypePage> with AutomaticKeepAliveClientMixin{
   ScrollController _scrollController = new ScrollController();
   List<ArticleBean> articles = [];
   bool isOver = false;
@@ -72,6 +72,7 @@ class _ProjectTypePageState extends State<ProjectTypePage>{
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: RefreshIndicator(
         child: ListView.builder(
@@ -131,4 +132,7 @@ class _ProjectTypePageState extends State<ProjectTypePage>{
     super.dispose();
     _scrollController.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
